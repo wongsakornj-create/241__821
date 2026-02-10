@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  dp:
+    image: mysql:8.0
+    container_name: mysql_db_821
+    command: __defaul_authentication_plufin=mysql_native_password
+    environment:
+      MYZQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: webdb
+    ports:
+      - "8822:3306"
+    volumes:
+      - mysql_data_821:/var/lib/mysql
+    networks:
+      - weblab821
+    restart: always
+
+  phpmyadmin:
+  image: phpmyadmin:lastest
+  container_name: phpmyadmin_821
+  environment:
+      PMA_HOST: mysql_db_821
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+      UPLOAD_LIMIT: 64M
+  ports:
+      - "8822:80"
+  depends_on:
+      - dp 
+  networks:
+      - weblab821
+  restart: always
+
+networks:
+  weblab821:
+    driver: bridge
+
+volumes:
+  mysql_data_821:
+    driver: local
