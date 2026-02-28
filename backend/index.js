@@ -17,7 +17,7 @@ const initDBconnection = async () => {
             user: 'root',
             password: 'root',
             database: 'webdb',
-            port: 8820
+            port: 8821
         });
         console.log('Database connected');
     } catch (error) {
@@ -162,4 +162,5 @@ app.delete('/users', async (req, res) => {
 app.listen(port, async () => {
     await initDBconnection();
     console.log(`Server is running on port ${port}`);
+
 });
